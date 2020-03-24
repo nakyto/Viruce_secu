@@ -1,4 +1,4 @@
-cd mediaPlayer/
+cd ../MediaPlayer/
 make
-cd ..
-./mediaPlayer/MediaPlayer
+cd ../Environnement
+../MediaPlayer/MediaPlayer
