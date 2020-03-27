@@ -14,16 +14,13 @@ int main(int argc, char *argv[]){
 
   char LA_CHAINE_A_CONSERTIRE[255];
 
-  printf("==============================|\n");
-  printf("------------MORCE-------------|\n");
-  printf("Information importante :      |\n");
-  printf("dans votre résulta les '!'    |\n");
-  printf("son des charactre non pris    |\n");
-  printf("en charge, veiller indique,   |\n");
-  printf("UNIQUEMENT des letre + espace |\n");
-  printf("===============================\n");
+  printf("=================================|\n");
+  printf("--------------MORCE--------------|\n");
+  printf("Ce programme prend en charge :   |\n");
+  printf("les lettres ainsi que les epaces |\n");
+  printf("=================================|\n");
 
-  printf("Enter an String :");
+  printf("Enter a String :");
   fgets(LA_CHAINE_A_CONSERTIRE,255,stdin);
   printf("ma chaine :%s",LA_CHAINE_A_CONSERTIRE);
 

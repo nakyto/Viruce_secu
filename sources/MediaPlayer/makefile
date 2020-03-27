@@ -5,4 +5,4 @@ CFLAGS		+= -Wall -Wextra -g
 LDFLAGS		= `pkg-config --libs-only-L gtk+-3.0`
 LDLIBS		= `pkg-config --libs-only-l --libs-only-other gtk+-3.0`
 
-MediaPlayer: MediaPlayer
+MediaPlayer.exe: MediaPlayer
