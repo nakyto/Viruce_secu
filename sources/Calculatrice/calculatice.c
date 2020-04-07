@@ -26,84 +26,40 @@ double opAdd(char** cl,int i ){
         //}// fin if
     return result;
 }
+
 // operation soustraction
-double opSou(char* cl,int i ){
+double opSou(char** cl,int i ){
     static float result;
-        if (cl[i-1] == '\0' || cl[i-1] == ' ')
-            {
-                perror("Error : String is not conform\nMake sure, you don't hava space or null char\n");
-                exit(EXIT_FAILURE);
-            }else
-            {
-                // on vérifi si le charactère precédant est un digit, un nombre.
-                if (isdigit(cl[i-1]) == 1 )
-                {
-                    int a = atoi(cl[i-1]); // is on l'affacete a un variable
+        float a = atof(cl[i-1]); // ici on l'affacete a un variable
+        float b = atof(cl[i+1]);
 
-                    if (isdigit(cl[i+1]) == 1)
-                    {
-                    int b = atoi(cl[i+1]);
-                    result = a-b; // le calcule d'une adision
-                    }
-
-                }
-
-        }// fin if
+        result = a-b; // le calcule d'une soustractions
 
     return result;
 }
+
 // opération multiplication
-double opMul(char* cl,int i ){
+double opMul(char** cl,int i ){
     static float result;
+        float a = atof(cl[i-1]); // ici on l'affacete a un variable
+        float b = atof(cl[i+1]);
 
-        if (cl[i-1] == '\0' || cl[i-1] == ' ')
-            {
-                perror("Error : String is not conform\nMake sure, you don't hava space or null char\n");
-                exit(EXIT_FAILURE);
-            }else
-            {
-                // on vérifi si le charactère precédant est un digit, un nombre.
-                if (isdigit(cl[i-1]) == 1 )
-                {
-                    int a = atoi(cl[i-1]); // is on l'affacete a un variable
-
-                    if (isdigit(cl[i+1]) == 1)
-                    {
-                    int b = atoi(cl[+1]);
-                    result = a*b; // le calcule d'une adision
-                    }
-
-                }
-
-        }// fin if
-}
-//opération division
-double opDiv(char* cl,int i ){
-    static float result;
-        if (cl[i-1] == '\0' || cl[i-1] == ' ')
-            {
-                perror("Error : String is not conform\nMake sure, you don't hava space or null char\n");
-                exit(EXIT_FAILURE);
-            }else
-            {
-                // on vérifi si le charactère precédant est un digit, un nombre.
-                if (isdigit(cl[i-1]) == 1 )
-                {
-                    int a = atoi(cl[i-1]); // is on l'affacete a un variable
-
-                    if (isdigit(cl[i+1]) == 1)
-                    {
-                    int b = atoi(cl[i+1]);
-                    result = a/b; // le calcule d'une adision
-                    }
-
-                }
-
-        }// fin if
+        result = a*b; // le calcule d'une multipilcation
     return result;
 }
+
+//opération division
+double opDiv(char** cl,int i ){
+    static float result;
+        float a = atof(cl[i-1]); // ici on l'affacete a un variable
+        float b = atof(cl[i+1]);
+
+        result = a/b; // le calcule d'une division
+    return result;
+}
+
 // opération puisance
-double opPow(char* cl,int i ){
+double opPow(char** cl,int i ){
     static float result;
         if (cl[i-1] == '\0' || cl[i-1] == ' ')
             {
@@ -112,19 +68,14 @@ double opPow(char* cl,int i ){
             }else
             {
                 // on vérifi si le charactère precédant est un digit, un nombre.
-                if (isdigit(cl[i-1]) == 1 )
-                {
-                    int a = atoi(cl[i-1]); // is on l'affacete a un variable
+                
+                    float a = atof(cl[i-1]); // is on l'affacete a un variable
 
-                    if (isdigit(cl[i+1]) == 1)
-                    {
-                    int b = atoi(cl[i+1]);
+                    float b = atof(cl[i+1]);
                     result = pow(a,b); // le calcule d'une puissance
-                    }
+                
+            }// fin if
 
-                }
-
-        }// fin if
     return result;
 }
 
@@ -150,9 +101,9 @@ double myCacluate(char** cl,int lenCharText){
             monCal += opAdd(cl,i);
             break;
         case'-':
-            monCal += opAdd(cl,i);
+            monCal += opSou(cl,i);
             break;
-        case'*':
+        case'*' :
             monCal += opMul(cl,i);
             break;
         case'/':
@@ -170,25 +121,6 @@ double myCacluate(char** cl,int lenCharText){
     return monCal;
 }
 
-
-
-
-int string_lenght(char **S){
-    int indexTab = 0;
-    int c = 0;
-
-    while (S[indexTab][c] != NULL)
-    {
-        for(c;c< strlen(S[indexTab]);c++);
-        
-        indexTab++;
-    }
-    
-    return indexTab;
-
-}
-
-
 // ===============  end function =================================
 
 /**
@@ -197,6 +129,7 @@ int string_lenght(char **S){
  */
 int main(int argc, char** argv)
 {
+    char monCalcule[1024];
     if(argc < 2 ){
         //fprintf(stderr,"Error : entre des argumen\n");
         printf("Do you want to continue ?\n");
@@ -213,17 +146,31 @@ int main(int argc, char** argv)
 
           if (le_Chois == '1')
           {
+              //fflush(stdin);
               /**
                * @note : Cas pour continuer le programe
                */
               printf("Use spaces to separate number operator!!\n");
-              char monCalcule[255];
+              
               //monCalcule = malloc(255);
-              printf("Your calcul: ");
-              //fgets(monCalcule,255,stdin);
-              scanf("%hhd",monCalcule);
-              printf("===> %hhs",monCalcule );
+             
+              //printf("zsfnjjlsqne %hs",*stdin);
+              printf("Your calcul : ");
+              printf("............");
+              printf("this part is not finish, so sorry T_T, but we can use in agument in ./calc");
 
+
+
+              //fgets(monCalcule, sizeof(monCalcule), stdin);
+              //fscanf(stdin,"%s",monCalcule);
+              //while (fscanf(stdin,"%s",monCalcule)!=  );
+
+              //printf("\n");
+        
+              
+              
+              //printf("|%s|\n",monCalcule );
+              //puts(monCalcule);
             /*
               char * tmp  = strtok(monCalcule," ");  ;
               char ** StringToHasmap; 
@@ -240,6 +187,7 @@ int main(int argc, char** argv)
             //char** monCalculeSplit = StringToHasmap(monCalcule," ");
             //printf("\n ===> %s",StringToHasmap[0] );
               //printf("\nYour result :%.4f\n",myCacluate(StringToHasmap,strlen(monCalcule)));
+
           }
           if (le_Chois == '0')
           {
@@ -249,14 +197,7 @@ int main(int argc, char** argv)
               printf("Bye\n------- Programe Quiter ------\n");
               exit(EXIT_SUCCESS);
           }
-          if(le_Chois != '0' || le_Chois != '1')
-          {
-              /**
-               * @note : Cas non envisagé pour le programe
-               */
-              perror("Error : not envisagied casse\n");
-              exit(EXIT_FAILURE);
-          }
+          
         }else
         {
           /**
@@ -268,7 +209,14 @@ int main(int argc, char** argv)
 
 
     }else{
-       
+        for (size_t i = 0; i < argc; i++)
+        {
+            printf("%s",argv[i]);        
+            
+        }
+        
+        
+
         double result = myCacluate(argv,argc);
         fprintf(stdout,"\nYour result :%.4lf\n",result);
         printf("Bye  \n");
