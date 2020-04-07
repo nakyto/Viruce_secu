@@ -8,28 +8,22 @@
  * @arg : char** cl ( un tableau de char)
  */
 // operation addition
-double opAdd(char* cl,int i ){
-    static float result;
-        if (cl[i-1] == (char)0 || cl[i-1] == ' ')
-            {
-                perror("Error : String is not conform\nMake sure, you don't hava space or null char.\n");
-                exit(EXIT_FAILURE);
-            }else
-            {
-                // on vérifi si le charactère precédant est un digit, un nombre.
-                if (isdigit(cl[i-1]) == 1 )
-                {
-                    int a = atoi(cl[i-1]); // is on l'affacete a un variable
+double opAdd(char** cl,int i ){
+    double result;
 
-                    if (isdigit(cl[i+1]) == 1)
-                    {
-                    int b = atoi(cl[i+1]);
-                    result = a+b; // le calcule d'une adision
-                    }
+            // on vérifi si le charactère precédant est un digit, un nombre.
+           //if (isdigit(cl[i-1]) == 1 && isdigit(cl[i+1]) == 1)
+            //{
+                
+                float a = atof(cl[i-1]); // ici on l'affacete a un variable
+                float b = atof(cl[i+1]);
 
-                }
+                result = a+b; // le calcule d'une adision
+    
 
-        }// fin if
+            
+
+        //}// fin if
     return result;
 }
 // operation soustraction
@@ -134,17 +128,24 @@ double opPow(char* cl,int i ){
     return result;
 }
 
+/**
+ * 
+ * @arg char** cl 
+ * @arg int lenCharText .
+ */
 
-double myCacluate(char* cl){
-    double monCal=0;
 
-    for(int i = 0; i<strlen(cl); i++){
+double myCacluate(char** cl,int lenCharText){
+    double monCal=0.0;
+    //printf("%s",*cl);
 
+    //printf("%s",cl[2]);
 
-        switch ( cl[i] )
+    for(int i = 1; i<lenCharText-1; i++){
+        //printf("%s",cl[3]);
+        // on prend le premiser char pour chaque 'phrase'
+        switch(cl[i][0])
         {
-        case'(':
-            break;
         case'+':
             monCal += opAdd(cl,i);
             break;
@@ -163,9 +164,30 @@ double myCacluate(char* cl){
         default:
             break;
         }
-
+        
     }
+    //printf("%4lf",monCal);    
+    return monCal;
 }
+
+
+
+
+int string_lenght(char **S){
+    int indexTab = 0;
+    int c = 0;
+
+    while (S[indexTab][c] != NULL)
+    {
+        for(c;c< strlen(S[indexTab]);c++);
+        
+        indexTab++;
+    }
+    
+    return indexTab;
+
+}
+
 
 // ===============  end function =================================
 
@@ -194,13 +216,30 @@ int main(int argc, char** argv)
               /**
                * @note : Cas pour continuer le programe
                */
-              printf("Spaces are not tolerated!!\n");
+              printf("Use spaces to separate number operator!!\n");
               char monCalcule[255];
-              printf("Your calcul :");
+              //monCalcule = malloc(255);
+              printf("Your calcul: ");
               //fgets(monCalcule,255,stdin);
-              scanf("%s",monCalcule);
-              printf("\nYour result :%4f\n",myCacluate(monCalcule));
+              scanf("%hhd",monCalcule);
+              printf("===> %hhs",monCalcule );
 
+            /*
+              char * tmp  = strtok(monCalcule," ");  ;
+              char ** StringToHasmap; 
+              int i = 0;
+              while (monCalcule != "\0")
+              {
+                //StringToHasmap[i] = tmp; 
+                printf("%s",tmp);
+                tmp = strtok(NULL," ");  
+                //i++;          
+              }*/
+
+
+            //char** monCalculeSplit = StringToHasmap(monCalcule," ");
+            //printf("\n ===> %s",StringToHasmap[0] );
+              //printf("\nYour result :%.4f\n",myCacluate(StringToHasmap,strlen(monCalcule)));
           }
           if (le_Chois == '0')
           {
@@ -230,12 +269,12 @@ int main(int argc, char** argv)
 
     }else{
        
-        
-        fprintf(stdout,"\nYour result :%4f\n",myCacluate(argv));
+        double result = myCacluate(argv,argc);
+        fprintf(stdout,"\nYour result :%.4lf\n",result);
         printf("Bye  \n");
         exit(EXIT_SUCCESS);
     }
-    //printf("Bye  \n");
+    printf("Bye  \n");
     //printf("------- Programe Quiter ------\n");
     exit(EXIT_FAILURE);
 }
